@@ -2,6 +2,6 @@
   "name": "ractive-loader-rvc",
   "version": "1.0.0",
   "files": ["dist"],
-  "main": "lib.umd.js",
-  "module": "lib.es.js"
+  "main": "dist/ractive-loader-rvc.umd.js",
+  "module": "dist/ractive-loader-rvc.es.js"
 }

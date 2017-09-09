@@ -2,6 +2,6 @@
   "name": "ractive-transition-fade",
   "version": "1.0.0",
   "files": ["dist"],
-  "main": "lib.umd.js",
-  "module": "lib.es.js"
+  "main": "dist/ractive-transition-fade.umd.js",
+  "module": "dist/ractive-transition-fade.es.js"
 }

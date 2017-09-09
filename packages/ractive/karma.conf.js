@@ -8,8 +8,8 @@ module.exports = function (config) {
     files: [
       { pattern: '../../node_modules/simulant/dist/simulant.umd.js', nocache: true },
       { pattern: '../../node_modules/qunit-assert-html/dist/qunit-assert-html.js', nocache: true },
-      { pattern: 'lib.umd.js', nocache: true },
-      { pattern: 'tests.iife.js', nocache: true },
+      { pattern: 'dist/ractive.umd.js', nocache: true },
+      { pattern: 'tests/index.iife.js', nocache: true },
       { pattern: 'qunit/*.gif', served: true, included: false, watched: false, nocache: false },
     ],
     proxies: {

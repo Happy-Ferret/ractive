@@ -2,6 +2,6 @@
   "name": "ractive-adaptor-backbone",
   "version": "1.0.0",
   "files": ["dist"],
-  "main": "lib.umd.js",
-  "module": "lib.es.js"
+  "main": "dist/ractive-adaptor-backbone.umd.js",
+  "module": "dist/ractive-adaptor-backbone.es.js"
 }

@@ -2,6 +2,6 @@
   "name": "ractive-adaptor-rxjs",
   "version": "1.0.0",
   "files": ["dist"],
-  "main": "lib.umd.js",
-  "module": "lib.es.js"
+  "main": "dist/ractive-adaptor-rxjs.umd.js",
+  "module": "dist/ractive-adaptor-rxjs.es.js"
 }

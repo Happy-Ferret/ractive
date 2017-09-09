@@ -2,8 +2,8 @@
   "name": "ractive",
   "version": "1.0.0",
   "files": ["dist"],
-  "main": "lib.umd.js",
-  "module": "lib.es.js",
+  "main": "dist/ractive.umd.js",
+  "module": "dist/ractive.es.js",
   "scripts": {
     "test": "karma start"
   }

@@ -2,6 +2,6 @@
   "name": "ractive-transition-slide",
   "version": "1.0.0",
   "files": ["dist"],
-  "main": "lib.umd.js",
-  "module": "lib.es.js"
+  "main": "dist/ractive-transition-slide.umd.js",
+  "module": "dist/ractive-transition-slide.es.js"
 }

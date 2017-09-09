@@ -2,6 +2,6 @@
   "name": "ractive-adaptor-promise",
   "version": "1.0.0",
   "files": ["dist"],
-  "main": "lib.umd.js",
-  "module": "lib.es.js"
+  "main": "dist/ractive-adaptor-promise.umd.js",
+  "module": "dist/ractive-adaptor-promise.es.js"
 }

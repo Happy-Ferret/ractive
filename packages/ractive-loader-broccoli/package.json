@@ -2,6 +2,6 @@
   "name": "ractive-loader-broccoli",
   "version": "1.0.0",
   "files": ["dist"],
-  "main": "lib.umd.js",
-  "module": "lib.es.js"
+  "main": "dist/ractive-loader-broccoli.umd.js",
+  "module": "dist/ractive-loader-broccoli.es.js"
 }
