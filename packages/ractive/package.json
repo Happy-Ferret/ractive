@@ -6,5 +6,8 @@
     "lib.es.js"
   ],
   "main": "lib.umd.js",
-  "module": "lib.es.js"
+  "module": "lib.es.js",
+  "scripts": {
+    "test": "karma start"
+  }
 }
