@@ -1,88 +1,83 @@
-// Ractive-adaptors-Promise tests
-// ==============================
+import { module, test } from 'qunit'
+import Ractive from 'ractive'
+import Adaptor from 'ractive-adaptor-promise'
 
-(function () {
+module('ractive-adaptor-promise')
 
-	var fixture = document.getElementById( 'qunit-fixture' );
+test('A pending promise does not have any value', assert => {
+  const promise = new Promise((resolve, reject) => {})
 
-	asyncTest( 'Fulfilling a promise sets the resulting value', 1, function ( t ) {
-		var ractive, deferred;
+  const instance = Ractive({
+    template: '<p>{{ value }}</p>',
+    data: { value: promise },
+    adaptors: { Promise: Adaptor }
+  })
 
-		deferred = Q.defer();
+  const instanceValue = instance.get('value')
+  const domValue = instance.find('p').innerHTML
 
-		ractive = new Ractive({
-			el: fixture,
-			template: '<p>{{promise.val}}</p>',
-			data: { promise: deferred.promise },
-			adaptors: [ 'Promise' ]
-		});
+  assert.strictEqual(instanceValue, null)
+  assert.strictEqual(domValue, '')
+})
 
-		deferred.resolve( { val: 'value' } );
+test('Resolving with a primitive value', assert => {
+  const done = assert.async()
 
-		deferred.promise.then( function () {
-			t.equal( ractive.find( 'p' ).innerHTML, 'value' );
-			start();
-		});
-	});
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(1)
+    }, 5000)
+  })
 
-	asyncTest( 'Rejecting a promise sets the resulting value', 1, function ( t ) {
-		var ractive, deferred;
+  const instance = Ractive({
+    template: '<p>{{ value }}</p>',
+    data: { value: promise },
+    adaptors: { Promise: Adaptor }
+  })
 
-		deferred = Q.defer();
+  promise.then(value => {
+    const instanceValue = instance.get('value')
+    const domValue = instance.find('p').innerHTML
 
-		ractive = new Ractive({
-			el: fixture,
-			template: '<p>{{promise.val}}</p>',
-			data: { promise: deferred.promise },
-			adaptors: [ 'Promise' ]
-		});
+    assert.strictEqual(value, 1)
+    assert.strictEqual(instanceValue, 1)
+    assert.strictEqual(domValue, '1')
 
-		deferred.reject( { val: 'value' } );
+    done()
+  })
+})
 
-		deferred.promise.then( null, function () {
-			t.equal( ractive.find( 'p' ).innerHTML, 'value' );
-			start();
-		});
-	});
+test('Resolving with a non-primitive value', assert => {
+  const done = assert.async()
 
-	test( 'A pending promise does not have any value', 1, function ( t ) {
-		var ractive, deferred;
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ foo: 1 })
+    }, 5000)
+  })
 
-		deferred = Q.defer();
+  const instance = Ractive({
+    template: '<p>{{ value.foo }}</p>',
+    data: { value: promise },
+    adaptors: { Promise: Adaptor }
+  })
 
-		ractive = new Ractive({
-			el: fixture,
-			template: '<p>{{promise}}</p>',
-			data: { promise: deferred.promise },
-			adaptors: [ 'Promise' ]
-		});
+  promise.then(value => {
+    const instanceValue = instance.get('value.foo')
+    const domValue = instance.find('p').innerHTML
 
-		t.equal( ractive.find( 'p' ).innerHTML, '' );
-	});
+    assert.strictEqual(value, 1)
+    assert.strictEqual(instanceValue, 1)
+    assert.strictEqual(domValue, '1')
 
-	asyncTest( 'Fulfilling promises out of order only shows the last value', 1, function ( t ) {
-		var ractive, deferreds;
+    done()
+  })
+})
 
-		deferreds = [ Q.defer(), Q.defer() ];
+test('Rejecting with a primitive value', assert => {
+  assert.ok(true)
+})
 
-		ractive = new Ractive({
-			el: fixture,
-			template: '<p>{{promise.val}}</p>',
-			data: { promise: deferreds[0].promise },
-			adaptors: [ 'Promise' ]
-		});
-
-		ractive.set( 'promise', deferreds[1].promise );
-
-		// Fulfill the second promise first, then the first one.
-		deferreds[1].fulfill( { val: 'value2' } );
-		deferreds[1].promise.then( function() {
-			deferreds[0].fulfill( { val: 'value1' } );
-			return deferreds[0];
-		}).then( function() {
-			t.equal( ractive.find( 'p' ).innerHTML, 'value2' );
-			start();
-		});
-	});
-
-}());
+test('Rejecting with a non-primitive value', assert => {
+  assert.ok(true)
+})
