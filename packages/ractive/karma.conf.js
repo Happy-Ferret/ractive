@@ -1,6 +1,24 @@
 const base = require('../../karma.conf.js')
 
 module.exports = function (config) {
+	basePath: '../.build',
+	plugins: ['karma-qunit', 'karma-failed-reporter'],
+	frameworks: ['qunit'],
+	reporters: ['failed'],
+	customContextFile: '../karma/context.html',
+	client: {
+		captureConsole: false,
+		qunit: {
+			reorder: false,
+			testTimeout: 30000
+		}
+	},
+	singleRun: true
+
+
+
+
+
   config.set(Object.assign({}, base, {
     plugins: base.plugins.concat(['karma-phantomjs-launcher']),
     browsers: ['PhantomJS'],

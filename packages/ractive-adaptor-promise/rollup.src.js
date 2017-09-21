@@ -2,7 +2,7 @@ import pkg from './package.json'
 import buble from 'rollup-plugin-buble'
 
 export default {
-  input: 'src/index.js',
+  input: `src/index.js`,
   sourcemap: true,
   plugins: [
     buble({transforms: { modules: false }})
